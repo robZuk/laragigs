@@ -7,7 +7,6 @@ use App\Models\Listing;
 // All Listings
 Route::get('/', function () {
     return view('listings', [
-        'heading' => 'Latest Listings',
         'listings' => Listing::all()
     ]);
 });
@@ -23,7 +22,7 @@ Route::get('/', function () {
 //     } else {
 //         abort('404');
 //     }
-   
+
 // });
 
 //Single Listing
@@ -32,4 +31,3 @@ Route::get('/listings/{listing}', function (Listing $listing) {
         'listing' => $listing
     ]);
 });
-
