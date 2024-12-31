@@ -3,13 +3,16 @@
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Listing;
+use App\Http\Controllers\ListingController;
 
 // All Listings
-Route::get('/', function () {
-    return view('listings', [
-        'listings' => Listing::all()
-    ]);
-});
+Route::get('/', [ListingController::class, 'index']);
+
+// Route::get('/', function () {
+//     return view('listings', [
+//         'listings' => Listing::all()
+//     ]);
+// });
 
 
 // Single Listing
@@ -25,9 +28,22 @@ Route::get('/', function () {
 
 // });
 
+
+
+// Route::get('/listings/{listing}', function (Listing $listing) {
+//     return view('listing', [
+//         'listing' => $listing
+//     ]);
+// });
+
+
+//Show Create Form
+Route::get('/listings/create', [ListingController::class, 'create']);
+
+
+//Store Listing Data
+Route::post('/listings', [ListingController::class, 'store']);
+
+
 //Single Listing
-Route::get('/listings/{listing}', function (Listing $listing) {
-    return view('listing', [
-        'listing' => $listing
-    ]);
-});
+Route::get('/listings/{listing}', [ListingController::class, 'show']);
