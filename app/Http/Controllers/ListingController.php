@@ -22,7 +22,7 @@ class ListingController extends Controller
         // dd(request('tag'));
         return view('listings.index', [
             // 'listings' => Listing::all()
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->get()
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6)
         ]);
     }
 
@@ -52,6 +52,7 @@ class ListingController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        //dd($request->file('logo'));
         $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required', Rule::unique('listings', 'company')],
